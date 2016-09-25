@@ -16,25 +16,26 @@ export interface WeatherResult {
   place: string;
   country: string;
 
-  temperature: string;
-  humidity: string;
-  pressure: string;
-  temp_min: string;
-  temp_max: string;
-  wind: string;
-  precip: string;
-  clouds: string;
-
-  temperature1: string;
-  humidity1: string;
-  pressure1: string;
-  temp_min1: string;
-  temp_max1: string;
-  wind1: string;
-  precip1: string;
+  temperature: number; //string;
+  humidity: number; //string;
+  pressure: number; //string;
+  temp_min: number; //string;
+  temp_max:  number; //string;
+  wind:  number; //string;
+  precip:  string;
+  clouds: number;
+/*
+  temperature1: number; //string;
+  humidity1: number;  //string;
+  pressure1: number; //string;
+  temp_min1:  number; //string;
+  temp_max1:  number; //string;
+  wind1:  number; //string;
+  precip1:  number; //string;
   clouds1: string;
+*/
+  //wdata: Array<weatherRow>;
 
-  wdata: Array<weatherRow>;
 }
 
 
@@ -64,7 +65,7 @@ export class WeatherService {
 
   private _parseData(data): WeatherResult {
     let [first,] = data.list;
-
+/*  OK: comment out for now
     var wdata1: weatherRow[] = new Array<weatherRow>();
 
     wdata1[0] = new weatherRow("Today", data.list[0].main.temp, data.list[0].main.humidity, data.list[0].main.pressure, data.list[0].main.temp_min,
@@ -72,6 +73,7 @@ export class WeatherService {
 
     wdata1[1] = new weatherRow("Tomorrow", data.list[1].main.temp, data.list[1].main.humidity, data.list[1].main.pressure, data.list[1].main.temp_min,
         data.list[1].main.temp_max, data.list[1].wind.speed, data.list[1].clouds.all,  data.list[1].weather[0].description);
+*/
 
     //   wdata1[0].temperature = data.list[0].main.temp;
     //   wdata1[0].humidity = data.list[0].main.humidity;
@@ -101,6 +103,18 @@ export class WeatherService {
  //     temperature: data.main.temp,
  //     humidity: data.main.humidity
 
+      place: data.name || 'unknown',
+      country: data.sys.country,
+      temperature: data.main.temp,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      temp_min: data.main.temp_min,
+      temp_max: data.main.temp_max,
+      wind: data.wind.speed,
+      precip: data.weather[0].main,
+      clouds: data.clouds.all
+
+/*
       place: data.city.name || 'unknown', //first.name
       country: data.city.country,
 
@@ -120,9 +134,10 @@ export class WeatherService {
       temp_max1: data.list[1].main.temp_max, //first.main.temp_max,
       wind1: data.list[1].wind.speed, // first.wind.speed,
       clouds1: data.list[1].clouds.all, // first.clouds.all,
-      precip1: data.list[1].weather[0].description,
+      precip1: data.list[1].weather[0].description
 
-      wdata: wdata1
+     //, wdata: wdata1
+*/
 
       /*
        //temperature: data.list[0].main.temp,  //first.main.temp,
