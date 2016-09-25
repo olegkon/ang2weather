@@ -21,7 +21,7 @@ describe('WeatherComponent', () => {
     let fixture = TestBed.createComponent(WeatherComponent);
     let element = fixture.nativeElement;
     let component = fixture.componentInstance;
-    //component.weather = {place: 'New York', country: 'USA', humidity: 44, temperature: 57,  wdata: null};
+    component.weather = {place: 'New York', country: 'USA', humidity: 44, temperature: 57, pressure: 123, temp_min: 32, temp_max: 60, precip: 'cloudy', wind: 123, clouds:0 }; //,  wdata: null};
 
     fixture.detectChanges();
 

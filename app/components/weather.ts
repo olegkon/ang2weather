@@ -4,17 +4,12 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import {WeatherService, WeatherResult} from '../services/weather.service';
 
+
 @Component({
   selector: 'my-weather',
   template: `
     <h2>Weather</h2>
-    <input type="text" placeholder="Enter city" [formControl]="searchInput">
-    <h3>Current weather in {{weather?.place}}:</h3>
-    <!--ul>
-      <li>Temperature: {{weather?.temperature}}F</li>
-      <li>Humidity: {{weather?.humidity}}%</li>
-    </ul-->        
-    
+    <input type="text" placeholder="Enter city" [formControl]="searchInput">    
       <h3>Current weather in {{weather?.place}} {{weather?.country}}:</h3>
         <ul>
           <li>Temperature: {{weather?.temperature}} F</li>
@@ -25,23 +20,12 @@ import {WeatherService, WeatherResult} from '../services/weather.service';
           <li>Clouds: {{weather?.clouds}} %</li>
           <li>Min temp: {{weather?.temp_min}} F</li>
           <li>Max temp: {{weather?.temp_max}} F</li>
-        </ul>
-        
-        <br/>
-      
-      <h3>Tomorrow:</h3>
-        <ul>
-          <li>Temperature: {{weather?.temperature1}} F</li>
-          <li>Humidity: {{weather?.humidity1}} %</li>
-          <li>Pressure: {{weather?.pressure1}} mbar</li>
-          <li>Wind:     {{weather?.wind1}} mph</li>
-          <li>Precipitation: {{weather?.precip1}}</li>
-          <li>Clouds: {{weather?.clouds1}} %</li>
-          <li>Min temp: {{weather?.temp_min1}} F</li>
-          <li>Max temp: {{weather?.temp_max1}} F</li>
-    </ul>
+        </ul>        
+        <br/>   
+        <h3>Tomorrow: (not implemented yet)</h3>
   `,
 })
+
 export class WeatherComponent {
   searchInput: FormControl;
   weather: WeatherResult;

@@ -24,7 +24,7 @@ import {Grid1Component} from "./components/grid1";
   bootstrap: [AppComponent],
   providers: [
     { provide: LocationStrategy,   useClass: HashLocationStrategy },
-    { provide: WEATHER_URL_BASE,   useValue: 'http://api.openweathermap.org/data/2.5/forecast?q='},  //OK: forecast, was find
+    { provide: WEATHER_URL_BASE,   useValue: 'http://api.openweathermap.org/data/2.5/weather?q='},  //OK: forecast, was weather
     { provide: WEATHER_URL_SUFFIX, useValue: '&units=imperial&appid=ca3f6d6ca3973a518834983d0b318f73' },
     WeatherService
   ]
