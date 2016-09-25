@@ -4,7 +4,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import {WeatherService, WeatherResult} from '../services/weather.service';
 
-
 @Component({
   selector: 'my-weather',
   template: `
@@ -23,9 +22,9 @@ import {WeatherService, WeatherResult} from '../services/weather.service';
         </ul>        
         <br/>   
         <h3>Tomorrow: (not implemented yet)</h3>
+
   `,
 })
-
 export class WeatherComponent {
   searchInput: FormControl;
   weather: WeatherResult;
