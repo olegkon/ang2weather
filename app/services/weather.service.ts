@@ -64,7 +64,7 @@ export class WeatherService {
 
 
   private _parseData(data): WeatherResult {
-    let [first,] = data.list;
+ //   let [first,] = data.list;
 /*  OK: comment out for now
     var wdata1: weatherRow[] = new Array<weatherRow>();
 
