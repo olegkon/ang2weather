@@ -7,6 +7,7 @@ import 'rxjs/add/observable/empty';
 import { WeatherComponent } from './weather';
 import { WeatherService } from '../services/weather.service';
 
+
 describe('WeatherComponent', () => {
 
   beforeEach(() => {
@@ -21,7 +22,10 @@ describe('WeatherComponent', () => {
     let fixture = TestBed.createComponent(WeatherComponent);
     let element = fixture.nativeElement;
     let component = fixture.componentInstance;
-    component.weather = {place: 'New York', country: 'USA', humidity: 44, temperature: 57, pressure: 123, temp_min: 32, temp_max: 60, precip: 'cloudy', wind: 123, clouds:0 }; //,  wdata: null};
+    component.weather = {place: 'New York', country: 'USA',
+      humidity: 44, temperature: 57, pressure: 123, temp_min: 32, temp_max: 60, precip: 'cloudy', wind: 123, clouds:0,
+      humidity1: 44, temperature1: 57, pressure1: 123, temp_min1: 32, temp_max1: 60, precip1: 'cloudy', wind1: 123, clouds1:0
+    }; //,  wdata: null};
 
     fixture.detectChanges();
 

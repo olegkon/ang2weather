@@ -21,11 +21,20 @@ import {WeatherService, WeatherResult} from '../services/weather.service';
           <li>Min temp: {{weather?.temp_min}} F</li>
           <li>Max temp: {{weather?.temp_max}} F</li>
         </ul>        
-        <br/>   
-        <h3>Tomorrow: (not implemented yet)</h3>
+        <br/>
+    <h3>Tomorrow: </h3>
+      <ul>
+        <li>Temperature: {{weather?.temperature1}}F</li>
+        <li>Humidity: {{weather?.humidity1}}%</li>    
+        <li>Pressure: {{weather?.pressure1}} mbar</li>
+        <li>Wind:     {{weather?.wind1}} mph</li>      
+        <li>Clouds: {{weather?.clouds1}} %</li>
+        <li>Min temp: {{weather?.temp_min1}} F</li>
+        <li>Max temp: {{weather?.temp_max1}} F</li>
+        <li>Preciptitation: {{weather?.precip1}} </li>
+      </ul>
   `,
 })
-
 export class WeatherComponent {
   searchInput: FormControl;
   weather: WeatherResult;
