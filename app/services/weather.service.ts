@@ -10,9 +10,6 @@ export const WEATHER_URL_BASE = new OpaqueToken('WeatherUrlBase');
 export const WEATHER_URL_SUFFIX = new OpaqueToken('WeatherUrlSuffix');
 
 export interface WeatherResult {
-  //place: string;
-  //temperature: number;
-  //humidity: number;
   place: string;
   country: string;
 
@@ -24,18 +21,16 @@ export interface WeatherResult {
   wind:  number; //string;
   precip:  string;
   clouds: number;
-/*
-  temperature1: number; //string;
-  humidity1: number;  //string;
-  pressure1: number; //string;
-  temp_min1:  number; //string;
-  temp_max1:  number; //string;
-  wind1:  number; //string;
-  precip1:  number; //string;
-  clouds1: string;
-*/
-  //wdata: Array<weatherRow>;
 
+  temperature1: number;
+  humidity1: number;
+  pressure1: number;
+  temp_min1: number;
+  temp_max1: number;
+  wind1:   number;
+  clouds1: number;
+  precip1: string;
+  //wdata: Array<weatherRow>;
 }
 
 
@@ -59,12 +54,11 @@ export class WeatherService {
 
 
   private _hasResult(data): boolean {
-    return data['cod'] !== '404' && data.main;
+    return data['cod'] !== '404' && data.list[0]; //main;
   }
 
 
   private _parseData(data): WeatherResult {
- //   let [first,] = data.list;
 /*  OK: comment out for now
     var wdata1: weatherRow[] = new Array<weatherRow>();
 
@@ -97,13 +91,8 @@ export class WeatherService {
      wdata1[1].precip = data.list[1].weather[0].description;
      */
 
-
     return {
- //     place: data.name || 'unknown',
- //     temperature: data.main.temp,
- //     humidity: data.main.humidity
-
-      place: data.name || 'unknown',
+/*    place: data.name || 'unknown',
       country: data.sys.country,
       temperature: data.main.temp,
       humidity: data.main.humidity,
@@ -113,31 +102,28 @@ export class WeatherService {
       wind: data.wind.speed,
       precip: data.weather[0].main,
       clouds: data.clouds.all
-
-/*
-      place: data.city.name || 'unknown', //first.name
+*/
+      place: data.city.name || 'unknown',
       country: data.city.country,
+      temperature: data.list[0].main.temp,
+      humidity: data.list[0].main.humidity,
+      pressure: data.list[0].main.pressure,
+      temp_min: data.list[0].main.temp_min,
+      temp_max: data.list[0].main.temp_max,
+      wind: data.list[0].wind.speed,
+      precip: data.list[0].weather[0].main,
+      clouds: data.list[0].clouds.all
 
-      temperature: data.list[0].main.temp,  //first.main.temp,
-      humidity: data.list[0].main.humidity, //first.main.humidity,
-      pressure: data.list[0].main.pressure, //first.main.pressure,
-      temp_min: data.list[0].main.temp_min, //first.main.temp_min,
-      temp_max: data.list[0].main.temp_max, //first.main.temp_max,
-      wind: data.list[0].wind.speed, // first.wind.speed,
-      clouds: data.list[0].clouds.all, // first.clouds.all,
-      precip: data.list[0].weather[0].description,   //first.weather[0].description
-
-      temperature1: data.list[1].main.temp,  //first.main.temp,
-      humidity1: data.list[1].main.humidity, //first.main.humidity,
-      pressure1: data.list[1].main.pressure, //first.main.pressure,
-      temp_min1: data.list[1].main.temp_min, //first.main.temp_min,
-      temp_max1: data.list[1].main.temp_max, //first.main.temp_max,
-      wind1: data.list[1].wind.speed, // first.wind.speed,
-      clouds1: data.list[1].clouds.all, // first.clouds.all,
-      precip1: data.list[1].weather[0].description
+      , temperature1: data.list[1].main.temp,
+      humidity1: data.list[1].main.humidity,
+      pressure1: data.list[1].main.pressure,
+      temp_min1: data.list[1].main.temp_min,
+      temp_max1: data.list[1].main.temp_max,
+      wind1: data.list[1].wind.speed,
+      clouds1: data.list[1].clouds.all,
+      precip1: data.list[1].weather[0].main
 
      //, wdata: wdata1
-*/
 
       /*
        //temperature: data.list[0].main.temp,  //first.main.temp,

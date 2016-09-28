@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
-//import {Control} from '@angular/common';
+
+import {AgGridNg2} from 'ag-grid-ng2/main';
+
+import {GridOptions} from 'ag-grid/main';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
@@ -8,8 +11,7 @@ import 'rxjs/add/operator/switchMap';
 import {WeatherService, WeatherResult} from '../services/weather.service';
 import {weatherRow} from "./weatherRow";
 
-import {GridOptions} from 'ag-grid/main';
-import {AgGridNg2} from 'ag-grid-ng2/main';
+
 
 @Component({
     selector: 'my-grid2',
@@ -17,15 +19,20 @@ import {AgGridNg2} from 'ag-grid-ng2/main';
     	<br/>
     	<h2>Grid2 Component</h2> 
     	
-    	<input type="text" placeholder="Enter city" [ngFormControl]="searchInput1"/>
+    	<input type="text" placeholder="Enter city" [formControl]="searchInput1"/>
 		    
-      	<h3>Current weather in {{weather?.place}} </h3>      	
+      	<h3>Current weather in {{weather?.place}} {{weather?.country}}:</h3>     	
     	<!-- br/ -->        	    	
     	<ul>
             <li>Temperature: {{weather?.temperature}}F</li>
             <li>Humidity: {{weather?.humidity}}%</li>
         </ul>   	
-    	<br/>        
+    	<br/>
+    	 <h3>Tomorrow: </h3>
+        <ul>
+            <li>Temperature: {{weather?.temperature1}}F</li>
+            <li>Humidity: {{weather?.humidity1}}%</li>
+        </ul>        
      `
 })
 

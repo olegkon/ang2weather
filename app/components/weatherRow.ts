@@ -4,14 +4,14 @@
 
 export class weatherRow {
     public day:string;
-    public temperature: string;
-    public humidity: string;
-    public pressure: string;
-    public temp_min: string;
-    public temp_max: string;
-    public wind: string;
+    public temperature: number; //string;
+    public humidity:  number; //string;
+    public pressure:  number; //string;
+    public temp_min:  number; //string;
+    public temp_max:  number; //string;
+    public wind:  number; //string;
     public precip: string;
-    public clouds:string;
+    public clouds:  number; //string;
 
 
     constructor(day, temperature, humidity, pressure, temp_min, temp_max, wind, precip, clouds) {

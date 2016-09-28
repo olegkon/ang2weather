@@ -9,8 +9,8 @@ import { WeatherService } from '../services/weather.service';
 import { AppComponent } from './app';
 import { HomeComponent } from '../components/home';
 import { WeatherComponent } from '../components/weather';
-import {Grid1Component} from '../components/grid1';
-//import {Grid2Component} from './components/grid2';
+import {Grid1Component} from "../components/grid1";
+import {Grid2Component} from "../components/grid2";
 
 
 describe('Router', () => {
