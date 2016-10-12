@@ -30,15 +30,17 @@ System.config({
   packages: {
     'app' : {main: 'main', defaultExtension: 'ts'},
     'rxjs': {main: 'index'},
+
     lib: {
-      format: 'register',
-      defaultExtension: 'js'
-    },
-    'ag-grid-ng2': {
-      defaultExtension: "js"
-    },
-    'ag-grid': {
-      defaultExtension: "js"
+	      format: 'register',
+	      defaultExtension: 'js'
+	    },
+	    'ag-grid-ng2': {
+	      defaultExtension: "js"
+	    },
+	    'ag-grid': {
+	      defaultExtension: "js"
     }
+
   }
 });
