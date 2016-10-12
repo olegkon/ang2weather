@@ -9,8 +9,8 @@ import { WeatherService } from '../services/weather.service';
 import { AppComponent } from './app';
 import { HomeComponent } from '../components/home';
 import { WeatherComponent } from '../components/weather';
-import {Grid1Component} from '../components/grid1';
-//import {Grid2Component} from './components/grid2';
+import {Grid1Component} from "../components/grid1";
+import {Grid2Component} from "../components/grid2";
 
 
 describe('Router', () => {
@@ -19,7 +19,7 @@ describe('Router', () => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, RouterTestingModule,
           RouterTestingModule.withRoutes(routes)],
-      declarations: [AppComponent, HomeComponent, WeatherComponent],
+      declarations: [AppComponent, HomeComponent, WeatherComponent, Grid1Component, Grid2Component],
       providers: [
 
         // In this spec file we test navigation to WeatherComponent which in turn
