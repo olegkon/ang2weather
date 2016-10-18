@@ -49,8 +49,6 @@ import {weatherRow} from "./weatherRow";
 
 export class Grid2Component {
 
-    //myRowData = []; // this.myData ; //[ this.myData ];  //];  this.weather.wdata;
-
     private gridOptions:GridOptions;
 
     searchInput1: FormControl;
@@ -74,10 +72,11 @@ export class Grid2Component {
         this.searchInput1.valueChanges
             .debounceTime(500)
             .switchMap((place: string) => weatherService.getWeather(place))
-            .subscribe(   //(weather: WeatherResult) => this.weather = weather,
-                function (weather: WeatherResult) {
+            .subscribe(
+                (weather: WeatherResult) => {
                     this.weather = weather;
                     this.gridOptions.rowData = this.createDGRowData(weather);
+                    this.gridOptions.api.refreshView();
                 },
                 error => console.error(error),
                 () => console.log('Weather is retrieved'));
@@ -88,7 +87,7 @@ export class Grid2Component {
     }
 
 
-    private createColumnDefs() {
+    private createColumnDefs() {    //function or private
         return [
             { headerName: 'Day', field: "day", width:135},
             { headerName: 'Temperature', field: "temperature", width:115},
@@ -103,9 +102,10 @@ export class Grid2Component {
     }
 
 
-    private createDGRowData(weather) {	//function
+    private createDGRowData(weather: WeatherResult) {
+        //weather = this.weather;
     return [
-        { day: "today", temperature: this.weather.wdata[0].temperature,
+        { day: "today", temperature: weather.wdata[0].temperature,
             humidity: weather.wdata[0].humidity, pressure: weather.wdata[0].pressure, wind: weather.wdata[0].wind, precipitation: weather.wdata[0].precip,
             clouds: weather.wdata[0].clouds, temp_min: weather.wdata[0].temp_min, temp_max: weather.wdata[0].temp_max },
         { day: "tomorrow", temperature: weather.wdata[1].temperature,
@@ -114,7 +114,6 @@ export class Grid2Component {
         { day: "day after tomorrow", temperature: this.weather.wdata[2].temperature,
             humidity: weather.wdata[2].humidity, pressure: weather.wdata[2].pressure, wind: weather.wdata[2].wind, precipitation: weather.wdata[2].precip,
             clouds: weather.wdata[2].clouds, temp_min: weather.wdata[2].temp_min, temp_max: weather.wdata[2].temp_max }
-
 
         //           {day: "09/30/2016", temperature: 33, humidity: 99, pressure: 1000, wind: 15, precipitation: "clouds", clouds: 22, temp_min: 62, temp_max: 77},
         //           {day: "09/31/2016", temperature: 54, humidity: 95, pressure: 1005, wind: 16, precipitation: "sunny", clouds: 20, temp_min: 58, temp_max: 72}
