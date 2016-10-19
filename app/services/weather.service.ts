@@ -60,26 +60,24 @@ export class WeatherService {
 
 
   private _parseData(data): WeatherResult {
-   // return {
-     // place: data.name || 'unknown',
-     // temperature: data.main.temp,
-     // humidity: data.main.humidity
      
          var wdata1: weatherRow[] = new Array<weatherRow>();
      
-         wdata1[0] = new weatherRow("Today", data.list[0].main.temp, data.list[0].main.humidity, data.list[0].main.pressure, data.list[0].main.temp_min,
-             data.list[0].main.temp_max, data.list[0].wind.speed, data.list[0].clouds.all,  data.list[0].weather[0].main);
-     
+/*       wdata1[0] = new weatherRow("Today", data.list[0].main.temp, data.list[0].main.humidity, data.list[0].main.pressure, data.list[0].main.temp_min,
+             data.list[0].main.temp_max, data.list[0].wind.speed, data.list[0].clouds.all,  data.list[0].weather[0].main);     
          wdata1[1] = new weatherRow("Tomorrow", data.list[1].main.temp, data.list[1].main.humidity, data.list[1].main.pressure, data.list[1].main.temp_min,
-             data.list[1].main.temp_max, data.list[1].wind.speed, data.list[1].clouds.all,  data.list[1].weather[0].main);
-     
+             data.list[1].main.temp_max, data.list[1].wind.speed, data.list[1].clouds.all,  data.list[1].weather[0].main);     
          wdata1[2] = new weatherRow("Day after tomorrow", data.list[2].main.temp, data.list[2].main.humidity, data.list[2].main.pressure, data.list[2].main.temp_min,
              data.list[2].main.temp_max, data.list[2].wind.speed, data.list[2].clouds.all,  data.list[2].weather[0].main);
-     
-     
-         //   wdata1[0].temperature = data.list[0].main.temp;
-         //   wdata1[0].humidity = data.list[0].main.humidity;
-
+*/ 
+     	 var len:number = data.list.length;
+	 var row;
+	 for (var i = 0; len > i; i++) {
+	     row = new weatherRow (i, data.list[i].main.temp, data.list[i].main.humidity, data.list[i].main.pressure, data.list[i].main.temp_min,
+                 data.list[i].main.temp_max, data.list[i].wind.speed, data.list[i].clouds.all, data.list[i].weather[0].main);
+		      
+             wdata1.push(row);
+	 }
      
          return {
            place: data.city.name || 'unknown',
