@@ -40,6 +40,11 @@ describe('WeatherService', () => {
       }]
     };
 
+     //   place: data.city.name || 'unknown',
+     //   temperature: data.list[0].main.temp,
+     //   humidity: data.list[0].main.humidity,
+
+
     mockBackend.connections.subscribe((connection: MockConnection) => {
       let responseOpts = new ResponseOptions({body: JSON.stringify(mockResponseData)});
       connection.mockRespond(new Response(responseOpts));

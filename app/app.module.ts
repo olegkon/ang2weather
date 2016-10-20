@@ -15,13 +15,13 @@ import {
 } from './services/weather.service';
 
 import {AgGridModule} from 'ag-grid-ng2/main';
-import {Grid1Component} from "./components/grid1";
+//import {Grid1Component} from "./components/grid1";
 import {Grid2Component} from "./components/grid2";
 
 
 @NgModule({
   imports: [BrowserModule, HttpModule, ReactiveFormsModule, routing , AgGridModule.forRoot()],
-  declarations: [AppComponent, HomeComponent, WeatherComponent, Grid1Component, Grid2Component],
+  declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component],  //Grid1Component,
   bootstrap: [AppComponent],
   providers: [
     { provide: LocationStrategy,   useClass: HashLocationStrategy },

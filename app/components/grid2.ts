@@ -52,7 +52,8 @@ export class Grid2Component {
 
     searchInput1: FormControl;
 
-    weather: WeatherResult =  {
+    weather: WeatherResult;
+    /*= {
         place:"", country:"",
         temperature: 0, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, min_temp: 0, max_temp: 0,
         temperature1: 0, humidity1: 0, pressure1: 0, wind1: 0, precip1: "", clouds1: 0, min_temp1: 0, max_temp1: 0,
@@ -62,7 +63,7 @@ export class Grid2Component {
             { day: "after tomorrow", temperature: 2, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, temp_min: 0, temp_max: 0 }
         ]
     };
-    
+  */
 
     constructor(weatherService: WeatherService) {
         this.searchInput1 = new FormControl('');
@@ -73,7 +74,7 @@ export class Grid2Component {
                 (weather: WeatherResult) => {
                     this.weather = weather;
                     this.gridOptions.api.setRowData(this.createDGRowData(weather));	// pass grid data and refresh display
-                    //this.gridOptions.rowData = this.createDGRowData(weather);	// that did not update grid display                    
+                    //this.gridOptions.rowData = this.createDGRowData(weather);	// that did not update grid display
                     //this.gridOptions.api.refreshView();	// refresh grid display
                     //console.log(this.gridOptions.rowData);	// debug
                 },
@@ -82,7 +83,7 @@ export class Grid2Component {
 
         this.gridOptions = <GridOptions>{};
         this.gridOptions.columnDefs = this.createColumnDefs();
-        this.gridOptions.rowData = this.createDGRowData(this.weather); //this.
+        this.gridOptions.rowData = ['undefined']; //this.createDGRowData(this.weather); //this.
     }
 
 
