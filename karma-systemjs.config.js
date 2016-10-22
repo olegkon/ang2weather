@@ -4,6 +4,8 @@ System.config({
   typescriptOptions: {emitDecoratorMetadata: true},
   map: {
 //    'app' : 'app',
+    'ag-grid': 'node_modules/ag-grid',
+    'ag-grid-ng2': 'node_modules/ag-grid-ng2',
     'rxjs': 'node_modules/rxjs',
 
     '@angular/common'                  : 'ng:common/bundles/common.umd.js',
@@ -28,7 +30,9 @@ System.config({
   },
   packages: {
     'app' : {main: 'main', defaultExtension: 'ts'},
-    'rxjs': {main: 'index'}
+    'rxjs': {main: 'index'},
+    'ag-grid': {main: 'main'},
+    'ag-grid-ng2': {main: 'main'}
   }
 });
 
