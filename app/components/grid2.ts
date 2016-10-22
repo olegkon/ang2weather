@@ -47,7 +47,6 @@ import {weatherRow} from "./weatherRow";
 
 
 export class Grid2Component {
-
     private gridOptions:GridOptions;
 
     searchInput1: FormControl;
