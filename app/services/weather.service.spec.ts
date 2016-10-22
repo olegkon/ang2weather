@@ -36,9 +36,10 @@ describe('WeatherService', () => {
         main: {
           temp: 57,
           humidity: 44
-        }
-      }]
-    };
+      }
+    }]
+  };
+
 
      //   place: data.city.name || 'unknown',
      //   temperature: data.list[0].main.temp,

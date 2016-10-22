@@ -3,7 +3,6 @@ System.config({
   transpiler: 'typescript',
   typescriptOptions: {emitDecoratorMetadata: true},
   map: {
-//    'app' : 'app',
     'ag-grid': 'node_modules/ag-grid',
     'ag-grid-ng2': 'node_modules/ag-grid-ng2',
     'rxjs': 'node_modules/rxjs',

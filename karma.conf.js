@@ -24,9 +24,10 @@ module.exports = function (config) {
       {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
       {pattern: 'node_modules/rxjs/**/*.js',         included: false, watched: false},
       {pattern: 'node_modules/rxjs/**/*.js.map',     included: false, watched: false},
-      {pattern: 'node_modules/ag-grid/**/*.js',      included: false, watched: false},
-      {pattern: 'node_modules/ag-grid-ng2/**/*.js',  included: false, watched: false},
+        {pattern: 'node_modules/ag-grid/**/*.js',      included: false, watched: false},
+        {pattern: 'node_modules/ag-grid-ng2/**/*.js',  included: false, watched: false},
       {pattern: 'app/**/*.ts',                included: false, watched: true}
+
     ],
     proxies: {
       // Required for component assets fetched by Angular's compiler
