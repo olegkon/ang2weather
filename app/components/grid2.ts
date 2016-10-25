@@ -89,12 +89,12 @@ export class Grid2Component {
     private createColumnDefs() {    
         return [
             { headerName: 'Day', field: "day", width:85},  //was 135
-            { headerName: 'Temperature (F)', field: "temperature", width:125},
+            { headerName: 'Temp (F)', field: "temperature", width:85},
             { headerName: 'Humidity (%)', field: "humidity", width:90},
             { headerName: 'Pressure (mbar)', field: "pressure", width:115},
             { headerName: 'Wind (mph)', field: "wind", width:90},
             { headerName: 'Precip (%)', field: "precipitation", width:80},
-            { headerName: 'Description', field: "clouds", width:80},
+            { headerName: 'Description', field: "clouds", width:120},
             { headerName: 'Min temp (F)', field: "temp_min", width:95},
             { headerName: 'Max temp (F)', field: "temp_max", width:95}
         ];
