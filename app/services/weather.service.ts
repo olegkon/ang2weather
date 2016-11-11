@@ -71,10 +71,12 @@ export class WeatherService {
              data.list[2].main.temp_max, data.list[2].wind.speed, data.list[2].clouds.all,  data.list[2].weather[0].main);
 */ 
      	 var len:number = data.list.length;
+     	 if (len > 30)
+     	   len=30;	// OK: restrict it to 30, after that it often has NULLs
 	 var row;
 	 for (var i = 0; len > i; i++) {
 	     row = new weatherRow (i, data.list[i].main.temp, data.list[i].main.humidity, data.list[i].main.pressure, data.list[i].main.temp_min,
-                 data.list[i].main.temp_max, data.list[i].wind.speed, data.list[i].clouds.all, data.list[i].weather[0].main);
+                 data.list[i].main.temp_max, data.list[i].wind.speed, data.list[i].clouds.all, data.list[i].weather[0].description);
 		      
              wdata1.push(row);
 	 }
@@ -89,7 +91,7 @@ export class WeatherService {
            min_temp: data.list[0].main.temp_min,
            max_temp: data.list[0].main.temp_max,
            wind: data.list[0].wind.speed,
-           precip: data.list[0].weather[0].main,
+           precip: data.list[0].weather[0].description,
            clouds: data.list[0].clouds.all
      
            , temperature1: data.list[1].main.temp,
@@ -98,7 +100,7 @@ export class WeatherService {
            min_temp1: data.list[1].main.temp_min,
            max_temp1: data.list[1].main.temp_max,
            wind1: data.list[1].wind.speed,
-           precip1: data.list[1].weather[0].main,
+           precip1: data.list[1].weather[0].description,
            clouds1: data.list[1].clouds.all           
      
           , wdata: wdata1

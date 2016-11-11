@@ -17,11 +17,12 @@ import {
 import {AgGridModule} from 'ag-grid-ng2/main';
 //import {Grid1Component} from "./components/grid1";
 import {Grid2Component} from "./components/grid2";
+import {PrimeNGComponent} from "./components/primeng";
 
 
 @NgModule({
   imports: [BrowserModule, HttpModule, ReactiveFormsModule, routing , AgGridModule.forRoot()],
-  declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component],  //Grid1Component,
+  declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component, PrimeNGComponent],  //Grid1Component,
   bootstrap: [AppComponent],
   providers: [
     { provide: LocationStrategy,   useClass: HashLocationStrategy },
