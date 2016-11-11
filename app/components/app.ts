@@ -9,6 +9,7 @@ import {Component} from '@angular/core';
       <a [routerLink]="['weather']">Weather</a>
       <!--a [routerLink]="['grid1']">Grid1</a-->
       <a [routerLink]="['grid2']">Grid2</a>
+      <a [routerLink]="['primeng']">PrimeNG</a>
     </div>
     <div>
       <router-outlet></router-outlet>

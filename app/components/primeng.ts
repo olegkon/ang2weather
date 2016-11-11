@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 import {AgGridNg2} from 'ag-grid-ng2/main';
@@ -8,9 +8,11 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 
 //import {ComponentModule} from 'primeng/components/componentname/componentname';
-//import {InterfaceName} from 'primeng/common/api';
-import {AccordionModule} from 'primeng/components/accordion/accordion';
-import {MenuItem} from 'primeng/common/api';
+//import {InterfaceName} from 'primeng/components/common/api';
+//import {DataTableModule} from 'primeng/components/datatable;
+
+
+import {DataTableModule, SharedModule} from 'primeng/primeng';
 
 import {WeatherService, WeatherResult} from '../services/weather.service';
 import {weatherRow} from "./weatherRow";
@@ -18,10 +20,10 @@ import {weatherRow} from "./weatherRow";
 
 
 @Component({
-    selector: 'my-grid2',
+    selector: 'my-primeng',
     template: `
     	<br/>
-    	<h2>Grid2 Component</h2> 
+    	<h2>PrimeNG Component</h2> 
     	
     	<input type="text" placeholder="Enter city" [formControl]="searchInput1"/>
         <br>     
@@ -44,15 +46,24 @@ import {weatherRow} from "./weatherRow";
         </ul>       
         <br/>
         
-         <ag-grid-ng2 style="height:300px; width:870px"  
+         <!--ag-grid-ng2 style="height:300px; width:870px"  
             class="ag-fresh" [gridOptions]="gridOptions" >
-         </ag-grid-ng2 >
+         </ag-grid-ng2 -->
+
+         
+         <p-dataTable [value]="arr">
+            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+         </p-dataTable>
      `
 })
 
 
-export class Grid2Component {
-    private gridOptions:GridOptions;
+export class PrimeNGComponent implements OnInit {
+    //private gridOptions:GridOptions;
+
+    //cars: Car[];
+    arr: weatherRow[]; //Array<weatherRow>;
+    cols: any[];
 
     searchInput1: FormControl;
 
@@ -77,7 +88,8 @@ export class Grid2Component {
             .subscribe(
                 (weather: WeatherResult) => {
                     this.weather = weather;
-                    this.gridOptions.api.setRowData(this.createDGRowData(weather));	// pass grid data and refresh display
+                    this.arr = this.createDGRowData(weather);
+                    //this.gridOptions.api.setRowData(this.createDGRowData(weather));	// pass grid data and refresh display
                     //this.gridOptions.rowData = this.createDGRowData(weather);	// that did not update grid display
                     //this.gridOptions.api.refreshView();	// refresh grid display
                     //console.log(this.gridOptions.rowData);	// debug
@@ -85,23 +97,23 @@ export class Grid2Component {
                 error => console.error(error),
                 () => console.log('Weather is retrieved'));
 
-        this.gridOptions = <GridOptions>{};
-        this.gridOptions.columnDefs = this.createColumnDefs();
-        this.gridOptions.rowData = ['undefined']; //this.createDGRowData(this.weather); //this.
+//        this.gridOptions = <GridOptions>{};
+//        this.gridOptions.columnDefs = this.createColumnDefs();
+//        this.gridOptions.rowData = ['undefined']; //this.createDGRowData(this.weather); //this.
     }
 
 
     private createColumnDefs() {    
         return [
-            { headerName: 'Day', field: "day", width:85},  //was 135
-            { headerName: 'Temp (F)', field: "temperature", width:85},
-            { headerName: 'Humidity (%)', field: "humidity", width:90},
-            { headerName: 'Pressure (mbar)', field: "pressure", width:115},
-            { headerName: 'Wind (mph)', field: "wind", width:90},
-            { headerName: 'Precip (%)', field: "precipitation", width:80},
-            { headerName: 'Description', field: "clouds", width:120},
-            { headerName: 'Min temp (F)', field: "temp_min", width:95},
-            { headerName: 'Max temp (F)', field: "temp_max", width:95}
+            { field: "day", header: 'Day' },                    //width:85},
+            { field: "temperature", header: 'Temp (F)' },       //width:85},
+            { field: "humidity", header: 'Humidity (%)' },      // width:90},
+            { field: "pressure", header: 'Pressure (mbar)' },   //width:115},
+            { field: "wind", header: 'Wind (mph)' },            //width:90},
+            { field: "precipitation", header: 'Precip (%)' },   // width:80},
+            { field: "clouds", header: 'Description' },         //width:120},
+            { field: "temp_min", header: 'Min temp (F)' },      //width:95},
+            { field: "temp_max", header: 'Max temp (F)' }       //, width:95}
         ];
     }
 
@@ -118,30 +130,28 @@ export class Grid2Component {
     	      pressure: weather.wdata[i].pressure, 
     	      wind: weather.wdata[i].wind, 
     	      precipitation: weather.wdata[i].precip,
-	      clouds: weather.wdata[i].clouds, 
-	      temp_min: weather.wdata[i].temp_min, 
-	      temp_max: weather.wdata[i].temp_max 
+                clouds: weather.wdata[i].clouds,
+	            temp_min: weather.wdata[i].temp_min,
+	            temp_max: weather.wdata[i].temp_max
 	    };
 	      
 	    arr.push(row);
 	}
 	return arr;
-	
-/*	return [
-		{ day: "today", temperature: weather.wdata[0].temperature,
-		    humidity: weather.wdata[0].humidity, pressure: weather.wdata[0].pressure, wind: weather.wdata[0].wind, precipitation: weather.wdata[0].precip,
-		    clouds: weather.wdata[0].clouds, temp_min: weather.wdata[0].temp_min, temp_max: weather.wdata[0].temp_max },
-		{ day: "tomorrow", temperature: weather.wdata[1].temperature,
-		    humidity: weather.wdata[1].humidity, pressure: weather.wdata[1].pressure, wind: weather.wdata[1].wind, precipitation: weather.wdata[1].precip,
-		    clouds: weather.wdata[1].clouds, temp_min: weather.wdata[1].temp_min, temp_max: weather.wdata[1].temp_max },
-		{ day: "day after tomorrow", temperature: this.weather.wdata[2].temperature,
-		    humidity: weather.wdata[2].humidity, pressure: weather.wdata[2].pressure, wind: weather.wdata[2].wind, precipitation: weather.wdata[2].precip,
-		    clouds: weather.wdata[2].clouds, temp_min: weather.wdata[2].temp_min, temp_max: weather.wdata[2].temp_max }
+    }
 
-		//  {day: "09/30/2016", temperature: 33, humidity: 99, pressure: 1000, wind: 15, precipitation: "clouds", clouds: 22, temp_min: 62, temp_max: 77},
-		//  {day: "09/31/2016", temperature: 54, humidity: 95, pressure: 1005, wind: 16, precipitation: "sunny", clouds: 20, temp_min: 58, temp_max: 72}
-	    ];
-*/	    
+
+    ngOnInit() {
+        //this.carService.getCarsSmall().then(cars => this.cars = cars);
+
+        this.cols = this.createColumnDefs();
+/*        [
+            {field: 'vin', header: 'Vin'},
+            {field: 'year', header: 'Year'},
+            {field: 'brand', header: 'Brand'},
+            {field: 'color', header: 'Color'}
+        ];
+*/
     }
 
 }

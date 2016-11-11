@@ -10,6 +10,7 @@ import { AppComponent } from './app';
 import { HomeComponent } from '../components/home';
 import { WeatherComponent } from '../components/weather';
 import { Grid2Component } from '../components/grid2';
+import {PrimeNGComponent} from '../components/primeng'
 
 //import {Grid1Component} from "../components/grid1";
 import {AgGridModule} from 'ag-grid-ng2/main';
@@ -22,7 +23,7 @@ describe('Router', () => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, RouterTestingModule,
           RouterTestingModule.withRoutes(routes), AgGridModule],
-      declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component  ],  //Grid1Component, Grid2Component
+      declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component, PrimeNGComponent  ],  //Grid1Component, Grid2Component
       providers: [
 
         // In this spec file we test navigation to WeatherComponent which in turn

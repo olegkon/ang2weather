@@ -23,6 +23,8 @@ System.config({
     '@angular/http/testing'                    : 'ng:http/bundles/http-testing.umd.js',
     '@angular/platform-browser/testing'        : 'ng:platform-browser/bundles/platform-browser-testing.umd.js',
     '@angular/platform-browser-dynamic/testing': 'ng:platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
+
+      'primeng':                    'node_modules/primeng'
   },
   paths: {
     'ng:': 'node_modules/@angular/'
@@ -31,35 +33,8 @@ System.config({
     'app' : {main: 'main', defaultExtension: 'ts'},
     'rxjs': {main: 'index'},
     'ag-grid': {main: 'main'},
-    'ag-grid-ng2': {main: 'main'}
+    'ag-grid-ng2': {main: 'main'},
+      'primeng':                    { defaultExtension: 'js' }
   }
 });
 
-
-
-/*
-System.config({
-  baseURL: 'base',
-  transpiler: 'typescript',
-  typescriptOptions: {emitDecoratorMetadata: true},
-  map: {
-    '@angular': 'node_modules/@angular',
-    'rxjs': 'node_modules/rxjs'
-  },
-  meta: {
-    '@angular/*': {'format': 'cjs'}
-  },
-  packages: {
-    'app'                              : {main: 'main', defaultExtension: 'ts'},
-    'rxjs'                             : {main: 'Rx'},
-    '@angular/core'                    : {main: 'index'},
-    '@angular/common'                  : {main: 'index'},
-    '@angular/compiler'                : {main: 'index'},
-    '@angular/forms'                   : {main: 'index'},
-    '@angular/http'                    : {main: 'index'},
-    '@angular/platform-browser'        : {main: 'index'},
-    '@angular/platform-browser-dynamic': {main: 'index'},
-    '@angular/router'                  : {main: 'index'}
-  }
-});
-*/
