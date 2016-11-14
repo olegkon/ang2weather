@@ -12,7 +12,9 @@ import 'rxjs/add/operator/switchMap';
 //import {DataTableModule} from 'primeng/components/datatable;
 
 
-import {DataTableModule, SharedModule} from 'primeng/primeng';
+import {DataTableModule, DataGridModule, ChartModule, SharedModule} from 'primeng/primeng';
+import {DataTable, DataGrid, Column, ChartModule
+        } from 'primeng/primeng';
 
 import {WeatherService, WeatherResult} from '../services/weather.service';
 import {weatherRow} from "./weatherRow";
@@ -23,7 +25,7 @@ import {weatherRow} from "./weatherRow";
     selector: 'my-primeng',
     template: `
     	<br/>
-    	<h2>PrimeNG Component</h2> 
+    	<h2>PrimeNG Components</h2> 
     	
     	<input type="text" placeholder="Enter city" [formControl]="searchInput1"/>
         <br>     
@@ -32,53 +34,80 @@ import {weatherRow} from "./weatherRow";
     	<ul>
     	    <li>Temperature: {{weather?.wdata[0].temperature}}F</li>           
             <li>Humidity: {{weather?.wdata[0].humidity}}%</li>
-        </ul>   	
-    	<!--br/ -->
+        </ul>   	    	
     	 <h3>Tomorrow: </h3>
         <ul>
             <li>Temperature: {{weather?.wdata[1].temperature}}F</li>
             <li>Humidity: {{weather?.wdata[1].humidity}}%</li>
         </ul>         
-        <h3>Day after tomorrow: </h3>
-        <ul>
-            <li>Temperature: {{weather?.wdata[2].temperature}}F</li>
-            <li>Humidity: {{weather?.wdata[2].humidity}}%</li>
-        </ul>       
-        <br/>
-        
-         <!--ag-grid-ng2 style="height:300px; width:870px"  
-            class="ag-fresh" [gridOptions]="gridOptions" >
-         </ag-grid-ng2 -->
-
+		<!-- h3>Day after tomorrow: </h3>
+		<ul>
+		    <li>Temperature: {{weather?.wdata[2].temperature}}F</li>
+		    <li>Humidity: {{weather?.wdata[2].humidity}}%</li>
+		</ul -->       
+        <!-- br/ -->
          
+         <h3>DataTable:</h3> 
          <p-dataTable [value]="arr">
             <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
-         </p-dataTable>
-     `
+         </p-dataTable >
+         
+         <br/><br/>
+         
+         <p-dataGrid [value]="arr" [paginator]="true" [rows]="30">
+	     <header>
+	         DataGrid:
+	     </header>  
+	     
+	     <!-- template let-car>	     
+	         <div style="padding:3px" class="ui-g-12 ui-md-3">	         	
+	             <p-panel [header]="col.header" [paginator]="true" [style]="{'text-align':'center'}">	                 
+	                 <div class="car-detail">{{col.field}}</div>
+	                 <hr class="ui-widget-content" style="border-top:0">
+	                 <i class="fa fa-search" (click)="selectCar(car)" style="cursor:pointer"></i>
+	             </p-panel>	             
+	         </div>	         
+	     </template -->
+	     
+	 </p-dataGrid>
+         
+         
+         <br/>
+	          
+         <h3>LineChart:</h3>
+         <!-- p-chart type="line" [data]="data"></p-chart -->
+         
+         <!-- p-growl [value]="msgs"></p-growl -->	 
+	 <!-- p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart -->
+         
+     ` ,
+     directives: [            
+             DataTable, Column, DataGrid     
+             //, TabPanel, TabView, Header, Footer, Dialog, Button, InputText
+     ]
 })
 
 
 export class PrimeNGComponent implements OnInit {
-    //private gridOptions:GridOptions;
 
-    //cars: Car[];
     arr: weatherRow[]; //Array<weatherRow>;
     cols: any[];
+    
+    // for Line Chart
+    data: any;          
+    msgs: Message[];
 
     searchInput1: FormControl;
 
     weather: WeatherResult;
-    /*= {
-        place:"", country:"",
-        temperature: 0, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, min_temp: 0, max_temp: 0,
-        temperature1: 0, humidity1: 0, pressure1: 0, wind1: 0, precip1: "", clouds1: 0, min_temp1: 0, max_temp1: 0,
-        wdata: [
-            { day: "today", temperature: 0, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, temp_min: 0, temp_max: 0 },
-            { day: "tomorrow", temperature: 1, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, temp_min: 0, temp_max: 0 },
-            { day: "after tomorrow", temperature: 2, humidity: 0, pressure: 0, wind: 0, precip: "", clouds: 0, temp_min: 0, temp_max: 0 }
-        ]
-    };
-  */
+
+
+    selectData(event) {
+        this.msgs = [];
+        this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
+    }
+  
+  
 
     constructor(weatherService: WeatherService) {
         this.searchInput1 = new FormControl('');
@@ -89,17 +118,10 @@ export class PrimeNGComponent implements OnInit {
                 (weather: WeatherResult) => {
                     this.weather = weather;
                     this.arr = this.createDGRowData(weather);
-                    //this.gridOptions.api.setRowData(this.createDGRowData(weather));	// pass grid data and refresh display
-                    //this.gridOptions.rowData = this.createDGRowData(weather);	// that did not update grid display
-                    //this.gridOptions.api.refreshView();	// refresh grid display
-                    //console.log(this.gridOptions.rowData);	// debug
+                    this.data = this.createChartData(weather);                    
                 },
                 error => console.error(error),
                 () => console.log('Weather is retrieved'));
-
-//        this.gridOptions = <GridOptions>{};
-//        this.gridOptions.columnDefs = this.createColumnDefs();
-//        this.gridOptions.rowData = ['undefined']; //this.createDGRowData(this.weather); //this.
     }
 
 
@@ -130,28 +152,49 @@ export class PrimeNGComponent implements OnInit {
     	      pressure: weather.wdata[i].pressure, 
     	      wind: weather.wdata[i].wind, 
     	      precipitation: weather.wdata[i].precip,
-                clouds: weather.wdata[i].clouds,
-	            temp_min: weather.wdata[i].temp_min,
-	            temp_max: weather.wdata[i].temp_max
-	    };
-	      
+              clouds: weather.wdata[i].clouds,
+	      temp_min: weather.wdata[i].temp_min,
+	      temp_max: weather.wdata[i].temp_max
+	    };	      
 	    arr.push(row);
+	    
+	    
 	}
 	return arr;
     }
-
+    
+    
+    private createChartData(weather: WeatherResult) {
+       //var chartData:Any;
+       var len:number = weather.wdata.length;          	
+       var chartData = {
+	   labels: [],
+	   datasets: [
+	      {
+	         label: 'Min Temp',
+	         data: [],
+	         fill: false,
+	         borderColor: '#4bc0c0'
+	       },
+	       {
+	          label: 'Max Temp',
+	          data: [],
+	          fill: false,
+	          borderColor: '#565656'
+	        }
+	   ]
+       };
+       for (var i = 0; len > i; i++) {
+          chartData.labels.push(i);
+          chartData.datasets[0].data.push(weather.wdata[i].temp_min);
+          chartData.datasets[1].data.push(weather.wdata[i].temp_max);       	 	    
+    	}
+    	return chartData; 
+    }
+    
 
     ngOnInit() {
-        //this.carService.getCarsSmall().then(cars => this.cars = cars);
-
         this.cols = this.createColumnDefs();
-/*        [
-            {field: 'vin', header: 'Vin'},
-            {field: 'year', header: 'Year'},
-            {field: 'brand', header: 'Brand'},
-            {field: 'color', header: 'Color'}
-        ];
-*/
     }
 
 }
