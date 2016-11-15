@@ -19,9 +19,11 @@ import {AgGridModule} from 'ag-grid-ng2/main';
 import {Grid2Component} from "./components/grid2";
 import {PrimeNGComponent} from "./components/primeng";
 
+import {DataTableModule, DataGridModule, ChartModule, SharedModule} from 'primeng/primeng';
+
 
 @NgModule({
-  imports: [BrowserModule, HttpModule, ReactiveFormsModule, routing , AgGridModule.forRoot()],
+  imports: [BrowserModule, HttpModule, ReactiveFormsModule, routing , AgGridModule.forRoot(), DataTableModule, DataGridModule, ChartModule, SharedModule],
   declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component, PrimeNGComponent],  //Grid1Component,
   bootstrap: [AppComponent],
   providers: [

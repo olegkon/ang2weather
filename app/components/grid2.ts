@@ -21,7 +21,7 @@ import {weatherRow} from "./weatherRow";
     selector: 'my-grid2',
     template: `
     	<br/>
-    	<h2>Grid2 Component</h2> 
+    	<h2>Ag-Grid Component</h2> 
     	
     	<input type="text" placeholder="Enter city" [formControl]="searchInput1"/>
         <br>     
