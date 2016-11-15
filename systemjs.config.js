@@ -22,7 +22,9 @@ System.config({
     '@angular/platform-browser-dynamic/testing': 'ng:platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
 
     'ag-grid-ng2': 'node_modules/ag-grid-ng2',
-    'ag-grid': 'node_modules/ag-grid'
+    'ag-grid': 'node_modules/ag-grid',
+
+      'primeng':                    'node_modules/primeng'
   },
   paths: {
     'ng:': 'node_modules/@angular/'
@@ -30,15 +32,18 @@ System.config({
   packages: {
     'app' : {main: 'main', defaultExtension: 'ts'},
     'rxjs': {main: 'index'},
+      'primeng':  { defaultExtension: 'js' },
+
     lib: {
-      format: 'register',
-      defaultExtension: 'js'
-    },
-    'ag-grid-ng2': {
-      defaultExtension: "js"
-    },
-    'ag-grid': {
-      defaultExtension: "js"
+	      format: 'register',
+	      defaultExtension: 'js'
+	    },
+	    'ag-grid-ng2': {
+	      defaultExtension: "js"
+	    },
+	    'ag-grid': {
+	      defaultExtension: "js"
     }
+
   }
 });
