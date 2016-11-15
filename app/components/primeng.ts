@@ -12,9 +12,8 @@ import 'rxjs/add/operator/switchMap';
 //import {DataTableModule} from 'primeng/components/datatable;
 
 
-import {DataTableModule, DataGridModule, ChartModule, SharedModule} from 'primeng/primeng';
-import {DataTable, DataGrid, Column, ChartModule
-        } from 'primeng/primeng';
+//import {DataTableModule, DataGridModule, ChartModule, SharedModule} from 'primeng/primeng';
+import {DataTable, DataGrid, Column, Chart} from 'primeng/primeng';
 
 import {WeatherService, WeatherResult} from '../services/weather.service';
 import {weatherRow} from "./weatherRow";
@@ -30,17 +29,17 @@ import {weatherRow} from "./weatherRow";
     	<input type="text" placeholder="Enter city" [formControl]="searchInput1"/>
         <br>     
         
-      	<h3>Current weather in {{weather?.place}} {{weather?.country}}:</h3>    	       	    	
+      	<h4>Current weather in {{weather?.place}} {{weather?.country}}:</h4>    	       	    	
     	<ul>
     	    <li>Temperature: {{weather?.wdata[0].temperature}}F</li>           
             <li>Humidity: {{weather?.wdata[0].humidity}}%</li>
         </ul>   	    	
-    	 <h3>Tomorrow: </h3>
+    	 <h4>Tomorrow: </h4>
         <ul>
             <li>Temperature: {{weather?.wdata[1].temperature}}F</li>
             <li>Humidity: {{weather?.wdata[1].humidity}}%</li>
         </ul>         
-		<!-- h3>Day after tomorrow: </h3>
+		<!-- h4>Day after tomorrow: </h4>
 		<ul>
 		    <li>Temperature: {{weather?.wdata[2].temperature}}F</li>
 		    <li>Humidity: {{weather?.wdata[2].humidity}}%</li>
@@ -49,17 +48,16 @@ import {weatherRow} from "./weatherRow";
          
          <h3>DataTable:</h3> 
          <p-dataTable [value]="arr">
-            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+            <p-column  *ngFor="let col of cols"  [field]="col.field"  [header]="col.header"></p-column>
          </p-dataTable >
          
          <br/><br/>
          
-         <p-dataGrid [value]="arr" [paginator]="true" [rows]="30">
+         <!-- p-dataGrid [value]="arr" [paginator]="true" [rows]="15">
 	     <header>
 	         DataGrid:
-	     </header>  
-	     
-	     <!-- template let-car>	     
+	     </header>  	     
+	     <template let-car>	     
 	         <div style="padding:3px" class="ui-g-12 ui-md-3">	         	
 	             <p-panel [header]="col.header" [paginator]="true" [style]="{'text-align':'center'}">	                 
 	                 <div class="car-detail">{{col.field}}</div>
@@ -67,22 +65,20 @@ import {weatherRow} from "./weatherRow";
 	                 <i class="fa fa-search" (click)="selectCar(car)" style="cursor:pointer"></i>
 	             </p-panel>	             
 	         </div>	         
-	     </template -->
-	     
-	 </p-dataGrid>
-         
+	     </template>	     
+	 </p-dataGrid -->         
          
          <br/>
 	          
          <h3>LineChart:</h3>
-         <!-- p-chart type="line" [data]="data"></p-chart -->
+         <p-chart type="line" [data]="data" [options]="options"></p-chart>
          
-         <!-- p-growl [value]="msgs"></p-growl -->	 
-	 <!-- p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart -->
+         <!-- p-growl [value]="msgs"></p-growl>	 
+	 <p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart -->
          
      ` ,
      directives: [            
-             DataTable, Column, DataGrid     
+             DataTable, Column, DataGrid, Chart    
              //, TabPanel, TabView, Header, Footer, Dialog, Button, InputText
      ]
 })
@@ -90,23 +86,54 @@ import {weatherRow} from "./weatherRow";
 
 export class PrimeNGComponent implements OnInit {
 
-    arr: weatherRow[]; //Array<weatherRow>;
+    searchInput1: FormControl;    
+    weather: WeatherResult;
+    
+    // for dataTable / grid
+    arr: weatherRow[]; 
     cols: any[];
+
     
     // for Line Chart
-    data: any;          
+    options: any = {
+            title: {
+                display: true,
+                text: 'LineChart1',
+                fontSize: 16
+            },
+            legend: {
+                position: 'top'
+            }
+    };    
+    
+    // for Line Chart
+    data: any =  {
+	   labels: [],
+	   datasets: [
+	      {
+	         label: 'Min Temp',
+	         data: [],
+	         fill: false,
+	         borderColor: '#4bc0c0'
+	       },
+	       {
+	          label: 'Max Temp',
+	          data: [],
+	          fill: false,
+	          borderColor: '#ff0000'  //'#565656'
+	        }
+	   ]
+       };          
     msgs: Message[];
 
-    searchInput1: FormControl;
 
-    weather: WeatherResult;
+    
 
 
     selectData(event) {
         this.msgs = [];
         this.msgs.push({severity: 'info', summary: 'Data Selected', 'detail': this.data.datasets[event.element._datasetIndex].data[event.element._index]});
     }
-  
   
 
     constructor(weatherService: WeatherService) {
@@ -167,7 +194,7 @@ export class PrimeNGComponent implements OnInit {
     private createChartData(weather: WeatherResult) {
        //var chartData:Any;
        var len:number = weather.wdata.length;          	
-       var chartData = {
+       var chartData:Any = {
 	   labels: [],
 	   datasets: [
 	      {
@@ -180,7 +207,7 @@ export class PrimeNGComponent implements OnInit {
 	          label: 'Max Temp',
 	          data: [],
 	          fill: false,
-	          borderColor: '#565656'
+	          borderColor: '#ff0000'   //'#565656'
 	        }
 	   ]
        };
