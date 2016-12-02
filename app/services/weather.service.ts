@@ -10,10 +10,7 @@ export const WEATHER_URL_BASE = new OpaqueToken('WeatherUrlBase');
 export const WEATHER_URL_SUFFIX = new OpaqueToken('WeatherUrlSuffix');
 
 export interface WeatherResult {
-  //place: string;
-  //temperature: number;
-  //humidity: number;
-  place: string;
+  place: string;  
   country: string;
   
   temperature: number; //string;

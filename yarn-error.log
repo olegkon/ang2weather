@@ -1,0 +1,67 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\okonovalov\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\2.0\bin\x64;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\TortoiseSVN\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\maven-3.3.9\bin;%JAVA_HOME%\bin;%FLEX_HOME%\bin;C:\Program Files\TortoiseGit\bin;C:\Users\okonovalov\AppData\Roaming\npm;C:\Users\okonovalov\AppData\Local\Programs\Git\cmd;C:\Program Files\Java\jdk1.8.0_71\bin;%CATALINA_HOME%\bin;C:\ant196\bin;C:\maven-3.3.9\bin;C:\Program Files\Adobe\Adobe Flash Builder 4.7 (64 Bit)\sdks\4.6.0\bin
+
+Yarn version: 
+  0.17.10
+
+Node version: 
+  4.2.6
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "test_samples",
+    "description": "A sample Weather app showing how to test Angular 2 applications",
+    "private": true,
+    "scripts": {
+      "tsc": "tsc",
+      "start": "live-server",
+      "test": "karma start karma.conf.js"
+    },
+    "dependencies": {
+      "@angular/common": "^2.0.0",
+      "@angular/compiler": "^2.0.0",
+      "@angular/core": "^2.0.0",
+      "@angular/forms": "^2.0.0",
+      "@angular/http": "^2.0.0",
+      "@angular/platform-browser": "^2.0.0",
+      "@angular/platform-browser-dynamic": "^2.0.0",
+      "@angular/router": "3.0.0",
+      "ag-grid": "6.2.x",
+      "ag-grid-ng2": "6.2.x",
+      "chart.js": "^2.4.0",
+      "core-js": "^2.4.0",
+      "font-awesome": "4.3.0",
+      "primeng": "^1.0.0-final",
+      "reflect-metadata": "^0.1.8",
+      "rxjs": "5.0.0-beta.12",
+      "systemjs": "0.19.37",
+      "zone.js": "0.6.21"
+    },
+    "devDependencies": {
+      "@types/es6-shim": "0.0.30",
+      "@types/jasmine": "^2.2.29",
+      "jasmine-core": "~2.4.1",
+      "karma": "^1.2.0",
+      "karma-chrome-launcher": "^2.0.0",
+      "karma-firefox-launcher": "^1.0.0",
+      "karma-jasmine": "^1.0.2",
+      "live-server": "0.8.2",
+      "typescript": "^2.0.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: ENOENT: no such file or directory, open 'C:\Oleg\Ang2\ang2weather1\node_modules\@types\jasmine\index.d.ts'
+      at Error (native)
