@@ -48,21 +48,20 @@ import {weatherRow} from "./weatherRow";
          <p-chart type="bar" [data]="barChartData" ></p-chart>         
          <br />
 	          
-	 <p-dataGrid [value]="arr" [paginator]="true" [rows]="20">
+	 <p-dataGrid [value]="arr" [paginator]="true" [rows]="30">
 		 <header>
-	 	         DataGrid:
+	 	         DataGrid1:
 	         </header>  	     
-	         <template let-car>	     
-	         	<div class="ui-g-12 ui-md-3">
-				<!-- div *ngFor="let col of cols" -->
+	         <template let-weatherRow>	     
+	         	<div class="ui-g-12 ui-md-2">
+	         		<hr ui-datagrid-content style="border:1">
 				<p-panel *ngFor="let col of cols; let i=index" [header]="col.header" [style]="{'text-align':'center'}">				    
-				    {{i}} : {{col.field}} : {{arr[i][col.field]}}
-				</p-panel>				
-					<!-- {{col.field}} : {{arr[i][col.field]}} -->
-				<!-- /div -->  
+				    {{weatherRow[col.field]}}
+				</p-panel>	
+				
 			</div>
 			
-	             <!-- div style="padding:3px" class="ui-g-12 ui-md-6" -->
+	             <!-- div style="padding:3px" class="ui-g-12 ui-md-2" -->
 	         	<!-- div class="ui-datagrid-content ui-widget-content">
 		                <div class="ui-g">
 	    	                    <template ngFor [ngForOf]="arr" [ngForTemplate]="itemTemplate"></template>
@@ -70,10 +69,8 @@ import {weatherRow} from "./weatherRow";
 	       		</div -->
 	 	         	<!-- div class="car-detail">{{arr[row].field}}</div -->
 	 	         	
-	 	             <!-- p-panel [header]="col.header" [style]="{'text-align':'center'}">	                 
-	 	                 <div class="car-detail">{{cols[row].field}}</div>
-	 	                 <hr class="ui-widget-content" style="border-top:0">
-	 	                 <i class="fa fa-search" (click)="selectCar(car)" style="cursor:pointer"></i>
+	 	             <!-- p-panel [header]="'Day '+weatherRow.day+': temp min - max'" [style]="{'text-align':'center'}">	                 
+	 	                 <div class="car-detail">{{weatherRow.temp_min}} - {{weatherRow.temp_max}}</div>	 	                 
 	 	             </p-panel -->	             
 	 	     <!-- /div -->
 	 	     
@@ -93,8 +90,8 @@ export class PrimeNGComponent implements OnInit {
     searchInput1: FormControl;    
     weather: WeatherResult;
     
-    // for dataTable / grid
-    arr: weatherRow[]; 
+    // for DataTable / DataGrid
+    arr: weatherRow[];  
     cols: any[];
 
     
@@ -189,18 +186,17 @@ export class PrimeNGComponent implements OnInit {
     	var row;
     	for (var i = 0; len > i; i++) {
     	    row = { 
-    	      day: i, 
-    	      temperature: weather.wdata[i].temperature,
-    	      humidity: weather.wdata[i].humidity,
-    	      pressure: weather.wdata[i].pressure, 
-    	      wind: weather.wdata[i].wind, 
-    	      precipitation: weather.wdata[i].precip,
-              clouds: weather.wdata[i].clouds,
-	      temp_min: weather.wdata[i].temp_min,
-	      temp_max: weather.wdata[i].temp_max
+    	    	day: i, 
+    	    	temperature: weather.wdata[i].temperature,
+    	    	humidity: weather.wdata[i].humidity,
+    	    	pressure: weather.wdata[i].pressure, 
+    	    	wind: weather.wdata[i].wind, 
+    	    	precipitation: weather.wdata[i].precip,
+            	clouds: weather.wdata[i].clouds,
+	    	temp_min: weather.wdata[i].temp_min,
+	    	temp_max: weather.wdata[i].temp_max
 	    };	      
-	    arr.push(row);	    
-	    
+	    arr.push(row);	    	    
 	}
 	return arr;
     }
