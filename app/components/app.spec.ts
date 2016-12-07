@@ -14,7 +14,7 @@ import { PrimeNGComponent } from '../components/primeng'
 
 //import {Grid1Component} from "../components/grid1";
 import {AgGridModule} from 'ag-grid-ng2/main';
-import {DataTableModule, DataGridModule, ChartModule, SharedModule} from 'primeng/primeng';
+import {DataTableModule, DataGridModule, ChartModule, PanelModule, SharedModule} from 'primeng/primeng';
 
 
 describe('Router', () => {
@@ -23,8 +23,8 @@ describe('Router', () => {
     TestBed.configureTestingModule({
       imports: [ ReactiveFormsModule, RouterTestingModule,
           RouterTestingModule.withRoutes(routes), AgGridModule, 
-          DataTableModule, DataGridModule, ChartModule, SharedModule],
-      declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component, PrimeNGComponent  ],  //Grid1Component, Grid2Component
+          DataTableModule, DataGridModule, ChartModule, PanelModule, SharedModule],
+      declarations: [AppComponent, HomeComponent, WeatherComponent, Grid2Component, PrimeNGComponent  ],  //Grid1Component
       providers: [
 
         // In this spec file we test navigation to WeatherComponent which in turn
