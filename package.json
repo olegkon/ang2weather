@@ -8,13 +8,13 @@
     "test": "karma start karma.conf.js"
   },
   "dependencies": {
-    "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
-    "@angular/core": "^2.0.0",
-    "@angular/forms": "^2.0.0",
-    "@angular/http": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/forms": "2.0.0",
+    "@angular/http": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
     "@angular/router": "3.0.0",
     "ag-grid": "6.2.x",
     "ag-grid-ng2": "6.2.x",
@@ -25,7 +25,7 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.37",
-    "zone.js": "0.6.21"
+    "zone.js": "0.7.2"
   },
   "devDependencies": {
     "@types/es6-shim": "0.0.30",
