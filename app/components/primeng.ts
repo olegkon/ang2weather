@@ -155,19 +155,19 @@ export class PrimeNGComponent implements OnInit {
 	        data: [],
 	        backgroundColor: [
 	        	"#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-	                "#FF6381",
-			"#36A2E2",
-	                "#FFCE53"
+	            "#36A2EB",
+	            "#FFCE56",
+	            "#FF6381",
+				"#36A2E2",
+				"#FFCE53"
 	        ],
 	        hoverBackgroundColor: [
 	        	"#FF6384",
 	        	"#36A2EB",
 	        	"#FFCE56",
 	        	"#FF6381",
-			"#36A2E2",
-	                "#FFCE53"
+				"#36A2E2",
+	            "#FFCE53"
 	        ]
               }
        	   ]
@@ -322,7 +322,7 @@ export class PrimeNGComponent implements OnInit {
 	var j = -1;	
 	for (var i = 0; len > i; i++) {
 	  descr = weather.wdata[i].description;
-	  j = pieChartData.datasets.findDescription("description", descr); //findIndex(findDescription);
+	  j = pieChartData.datasets.findIndex( findDescription ); //("description", descr); //findIndex(findDescription);
 	  if (j >= 0) {	// found already - increase
 		console.log("found descr="+descr+", j="+j+", "+pieChartData[j]);
 		pieChartData.data[i] = pieChartData.data[i]+1;
@@ -340,12 +340,14 @@ export class PrimeNGComponent implements OnInit {
     
     
     //function 
-    Array.prototype.findDescription = function (name, value) { 
+    //Array.prototype.
+	//findDescription = function (name, value) {
+	function findDescription (name, value) {
     	for (var i = 0; i < this.length; i++) {
 	        if (this[i][name] == value) {
 	            return i;
 	        }
-	}
+		}
     	return -1;
         //return description === 'descr';  //pieChartData.datasets.description === 'descr';
     }
