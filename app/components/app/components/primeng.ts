@@ -46,13 +46,8 @@ import {weatherRow} from "./weatherRow";
 	 
 	 <h3>BarChart:</h3>
          <p-chart type="bar" [data]="barChartData" ></p-chart>         
-         <br/>
-         
-         <h3>PieChart:</h3>
-         <p-chart type="pie" [data]="pieChartData"></p-chart>
-	 <br/>
-	 
-	 
+         <br />
+	          
 	 <p-dataGrid [value]="arr" [paginator]="true" [rows]="30">
 		 <header>
 	 	         DataGrid1:
@@ -146,33 +141,6 @@ export class PrimeNGComponent implements OnInit {
 	   ]
        };           
        
-       
-       // for Pie Chart
-       pieChartData: any =  {
-       	   labels: [],
-       	   datasets: [
-       	      {
-	        data: [],
-	        backgroundColor: [
-	        	"#FF6384",
-	                "#36A2EB",
-	                "#FFCE56",
-	                "#FF6381",
-			"#36A2E2",
-	                "#FFCE53"
-	        ],
-	        hoverBackgroundColor: [
-	        	"#FF6384",
-	        	"#36A2EB",
-	        	"#FFCE56",
-	        	"#FF6381",
-			"#36A2E2",
-	                "#FFCE53"
-	        ]
-              }
-       	   ]
-       };       
-       
   
 //    selectCar(car: weatherRow) {
 //            this.selectedCar = weatherRow;
@@ -191,16 +159,11 @@ export class PrimeNGComponent implements OnInit {
                     this.arr = this.createDGRowData(weather);	// dataTable
                     this.data = this.createChartData(weather);  // lineChart
                     this.barChartData = this.createBarChartData(weather);  // barChart
-                    this.pieChartData = this.createPieChartData(weather);  // pieChart
                 },
                 error => console.error(error),
                 () => console.log('Weather is retrieved'));
     }
-	
-	
-    ngOnInit() {	
-        this.cols = this.createColumnDefs();
-    }	
+
 
     private createColumnDefs() {    
         return [
@@ -290,99 +253,9 @@ export class PrimeNGComponent implements OnInit {
         return barChartData; 
     }
     
-    
-    private createPieChartData(weather: WeatherResult) {       
-        var len:number = weather.wdata.length;          	
-        var pieChartData: Any =  {
-       	   labels: ["clear sky", "few clouds", "scattered clouds", "light rain", "moderate rain", "light snow", "broken clouds"],
-       	   datasets: [
-       	      {
-	        data: [ 8, 4, 2, 6, 3, 2, 5 ],
-	        backgroundColor: [
-	        	"#36A2E1",
-	        	"#36A0F9",
-	        	"#4bc0c0",
-	        	"#FF6384",	                
-	                "#F0CE56",
-	                "#FFF38F",			
-	                "#11CE53"
-	        ],
-	        hoverBackgroundColor: [
-	        	"#36A2E1",
-	        	"#36A0F9",
-	        	"#4bc0c0",
-	        	"#FF6384",	        	
-	        	"#F0CE56",
-	        	"#FFF38F",			
-	                "#11CE53"
-	        ]
-              }
-       	   ]
-        };                 
-	
-/*	var descr:string;
-	var j = -1;
-	var x = null;
-	for (var i = 0; len > i; i++) {
-	  descr = weather.wdata[i].description;
-	  x = pieChartData.labels.find(descr); //(p => p.description === descr);
-	  //x = pieChartData.labels.findDescr(descr); //(p => p.description === descr);
-	  console.log("found descr: "+objToString(x);
-	  if (x != null) {	// found already - increase
-	  		console.log("found descr="+descr+", j="+j+", "+pieChartData[j]);
-	  		pieChartData.data[i] = pieChartData.data[i]+1;
-	  		j = -1;
-	  		x = null;
-	  } else {	// not found - add
-	  		pieChartData.labels.push(descr);
-	  		pieChartData.data.push(1);
-	  }
-	  
-	  j = pieChartData.labels.findDescription("description", descr); //findIndex(findDescription);  
-	  // return pieChartData.datasets.find(p => p.description === descr);
-//	  if (j >= 0) {	// found already - increase
-//		console.log("found descr="+descr+", j="+j+", "+pieChartData[j]);
-//		pieChartData.data[i] = pieChartData.data[i]+1;
-//		j = -1;
-//	  } else {	// not found - add
-//		pieChartData.labels.push(descr);
-//		pieChartData.data.push(1);
-//	  }
 
-	  //pieChartData.labels.push(i);
-	  //pieChartData.datasets[0].data.push(weather.wdata[i].description);	   	 	    
-    	}
-*/    	return pieChartData; 
-    }
-    
-    
-    function findDescr (value) {
-    	return pieChartData.labels.find(p => p.description === value);
-    	//return pieChartData.datasets.find(p => p.description === value);
-        //return description === 'descr';  //pieChartData.datasets.description === 'descr';
-    }
-
-    
-    //function 
-    Array.prototype.findDescription = function (name, value) { 
-    	for (var i = 0; i < this.length; i++) {
-	        if (this[i][name] == value) {
-	            return i;
-	        }
-	}
-    	return -1;
-        //return description === 'descr';  //pieChartData.datasets.description === 'descr';
-    }
-
-    
-    function objToString (obj) {
-        var str = '';
-        for (var p in obj) {
-            if (obj.hasOwnProperty(p)) {
-                str += p + ', ' + obj[p] + '\n';
-            }
-        }
-        return str;
+    ngOnInit() {	
+        this.cols = this.createColumnDefs();
     }
 
 }
