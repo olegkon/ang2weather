@@ -46,23 +46,27 @@ import {weatherRow} from "./weatherRow";
 	 
 	 <h3>BarChart:</h3>
          <p-chart type="bar" [data]="barChartData" ></p-chart>         
-         <br />
-	          
-	 <p-dataGrid [value]="arr" [paginator]="true" [rows]="20">
+         <br/>
+         
+         <h3>PieChart:</h3>
+         <p-chart type="pie" [data]="pieChartData"></p-chart>
+	 <br/>
+	 
+	 
+	 <p-dataGrid [value]="arr" [paginator]="true" [rows]="30">
 		 <header>
-	 	         DataGrid:
+	 	         DataGrid1:
 	         </header>  	     
-	         <template let-car>	     
-	         	<div class="ui-g-12 ui-md-3">
-				<!-- div *ngFor="let col of cols" -->
+	         <template let-weatherRow>	     
+	         	<div class="ui-g-12 ui-md-2">
+	         		<hr ui-datagrid-content style="border:1">
 				<p-panel *ngFor="let col of cols; let i=index" [header]="col.header" [style]="{'text-align':'center'}">				    
-				    {{i}} : {{col.field}} : {{arr[i][col.field]}}
-				</p-panel>				
-					<!-- {{col.field}} : {{arr[i][col.field]}} -->
-				<!-- /div -->  
+				    {{weatherRow[col.field]}}
+				</p-panel>	
+				
 			</div>
 			
-	             <!-- div style="padding:3px" class="ui-g-12 ui-md-6" -->
+	             <!-- div style="padding:3px" class="ui-g-12 ui-md-2" -->
 	         	<!-- div class="ui-datagrid-content ui-widget-content">
 		                <div class="ui-g">
 	    	                    <template ngFor [ngForOf]="arr" [ngForTemplate]="itemTemplate"></template>
@@ -70,10 +74,8 @@ import {weatherRow} from "./weatherRow";
 	       		</div -->
 	 	         	<!-- div class="car-detail">{{arr[row].field}}</div -->
 	 	         	
-	 	             <!-- p-panel [header]="col.header" [style]="{'text-align':'center'}">	                 
-	 	                 <div class="car-detail">{{cols[row].field}}</div>
-	 	                 <hr class="ui-widget-content" style="border-top:0">
-	 	                 <i class="fa fa-search" (click)="selectCar(car)" style="cursor:pointer"></i>
+	 	             <!-- p-panel [header]="'Day '+weatherRow.day+': temp min - max'" [style]="{'text-align':'center'}">	                 
+	 	                 <div class="car-detail">{{weatherRow.temp_min}} - {{weatherRow.temp_max}}</div>	 	                 
 	 	             </p-panel -->	             
 	 	     <!-- /div -->
 	 	     
@@ -93,8 +95,8 @@ export class PrimeNGComponent implements OnInit {
     searchInput1: FormControl;    
     weather: WeatherResult;
     
-    // for dataTable / grid
-    arr: weatherRow[]; 
+    // for DataTable / DataGrid
+    arr: weatherRow[];  
     cols: any[];
 
     
@@ -144,6 +146,33 @@ export class PrimeNGComponent implements OnInit {
 	   ]
        };           
        
+       
+       // for Pie Chart
+       pieChartData: any =  {
+       	   labels: [],
+       	   datasets: [
+       	      {
+	        data: [],
+	        backgroundColor: [
+	        	"#FF6384",
+	                "#36A2EB",
+	                "#FFCE56",
+	                "#FF6381",
+			"#36A2E2",
+	                "#FFCE53"
+	        ],
+	        hoverBackgroundColor: [
+	        	"#FF6384",
+	        	"#36A2EB",
+	        	"#FFCE56",
+	        	"#FF6381",
+			"#36A2E2",
+	                "#FFCE53"
+	        ]
+              }
+       	   ]
+       };       
+       
   
 //    selectCar(car: weatherRow) {
 //            this.selectedCar = weatherRow;
@@ -162,11 +191,16 @@ export class PrimeNGComponent implements OnInit {
                     this.arr = this.createDGRowData(weather);	// dataTable
                     this.data = this.createChartData(weather);  // lineChart
                     this.barChartData = this.createBarChartData(weather);  // barChart
+                    this.pieChartData = this.createPieChartData(weather);  // pieChart
                 },
                 error => console.error(error),
                 () => console.log('Weather is retrieved'));
     }
-
+	
+	
+    ngOnInit() {	
+        this.cols = this.createColumnDefs();
+    }	
 
     private createColumnDefs() {    
         return [
@@ -189,18 +223,17 @@ export class PrimeNGComponent implements OnInit {
     	var row;
     	for (var i = 0; len > i; i++) {
     	    row = { 
-    	      day: i, 
-    	      temperature: weather.wdata[i].temperature,
-    	      humidity: weather.wdata[i].humidity,
-    	      pressure: weather.wdata[i].pressure, 
-    	      wind: weather.wdata[i].wind, 
-    	      precipitation: weather.wdata[i].precip,
-              clouds: weather.wdata[i].clouds,
-	      temp_min: weather.wdata[i].temp_min,
-	      temp_max: weather.wdata[i].temp_max
+    	    	day: i, 
+    	    	temperature: weather.wdata[i].temperature,
+    	    	humidity: weather.wdata[i].humidity,
+    	    	pressure: weather.wdata[i].pressure, 
+    	    	wind: weather.wdata[i].wind, 
+    	    	precipitation: weather.wdata[i].precip,
+            	clouds: weather.wdata[i].clouds,
+	    	temp_min: weather.wdata[i].temp_min,
+	    	temp_max: weather.wdata[i].temp_max
 	    };	      
-	    arr.push(row);	    
-	    
+	    arr.push(row);	    	    
 	}
 	return arr;
     }
@@ -257,9 +290,99 @@ export class PrimeNGComponent implements OnInit {
         return barChartData; 
     }
     
+    
+    private createPieChartData(weather: WeatherResult) {       
+        var len:number = weather.wdata.length;          	
+        var pieChartData: Any =  {
+       	   labels: ["clear sky", "few clouds", "scattered clouds", "light rain", "moderate rain", "light snow", "broken clouds"],
+       	   datasets: [
+       	      {
+	        data: [ 8, 4, 2, 6, 3, 2, 5 ],
+	        backgroundColor: [
+	        	"#36A2E1",
+	        	"#36A0F9",
+	        	"#4bc0c0",
+	        	"#FF6384",	                
+	                "#F0CE56",
+	                "#FFF38F",			
+	                "#11CE53"
+	        ],
+	        hoverBackgroundColor: [
+	        	"#36A2E1",
+	        	"#36A0F9",
+	        	"#4bc0c0",
+	        	"#FF6384",	        	
+	        	"#F0CE56",
+	        	"#FFF38F",			
+	                "#11CE53"
+	        ]
+              }
+       	   ]
+        };                 
+	
+/*	var descr:string;
+	var j = -1;
+	var x = null;
+	for (var i = 0; len > i; i++) {
+	  descr = weather.wdata[i].description;
+	  x = pieChartData.labels.find(descr); //(p => p.description === descr);
+	  //x = pieChartData.labels.findDescr(descr); //(p => p.description === descr);
+	  console.log("found descr: "+objToString(x);
+	  if (x != null) {	// found already - increase
+	  		console.log("found descr="+descr+", j="+j+", "+pieChartData[j]);
+	  		pieChartData.data[i] = pieChartData.data[i]+1;
+	  		j = -1;
+	  		x = null;
+	  } else {	// not found - add
+	  		pieChartData.labels.push(descr);
+	  		pieChartData.data.push(1);
+	  }
+	  
+	  j = pieChartData.labels.findDescription("description", descr); //findIndex(findDescription);  
+	  // return pieChartData.datasets.find(p => p.description === descr);
+//	  if (j >= 0) {	// found already - increase
+//		console.log("found descr="+descr+", j="+j+", "+pieChartData[j]);
+//		pieChartData.data[i] = pieChartData.data[i]+1;
+//		j = -1;
+//	  } else {	// not found - add
+//		pieChartData.labels.push(descr);
+//		pieChartData.data.push(1);
+//	  }
 
-    ngOnInit() {	
-        this.cols = this.createColumnDefs();
+	  //pieChartData.labels.push(i);
+	  //pieChartData.datasets[0].data.push(weather.wdata[i].description);	   	 	    
+    	}
+*/    	return pieChartData; 
+    }
+    
+    
+    function findDescr (value) {
+    	return pieChartData.labels.find(p => p.description === value);
+    	//return pieChartData.datasets.find(p => p.description === value);
+        //return description === 'descr';  //pieChartData.datasets.description === 'descr';
+    }
+
+    
+    //function 
+    Array.prototype.findDescription = function (name, value) { 
+    	for (var i = 0; i < this.length; i++) {
+	        if (this[i][name] == value) {
+	            return i;
+	        }
+	}
+    	return -1;
+        //return description === 'descr';  //pieChartData.datasets.description === 'descr';
+    }
+
+    
+    function objToString (obj) {
+        var str = '';
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str += p + ', ' + obj[p] + '\n';
+            }
+        }
+        return str;
     }
 
 }

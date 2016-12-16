@@ -9,7 +9,7 @@ import {WeatherService, WeatherResult} from '../services/weather.service'
 @Component({
   selector: 'my-weather',
   template: `
-        <h2>Weather</h2>
+        <h2>Weather Component</h2>
         <input type="text" placeholder="Enter city" [formControl]="searchInput">    
           <h3>Current weather in {{weather?.place}} {{weather?.country}}:</h3>
             <ul>
